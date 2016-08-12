@@ -3,15 +3,35 @@ $(document).ready(function() {
     loadPeeps();
     //listener
 
+//defined the object;
+    var peep = {};
+
+//added the POST stuff;
+    $.ajax({
+      type: 'POST',
+      url: '/people',
+      data: peep,
+      success: function(repsonse){
+        console.log('this works')
+        loadPeeps();
+      },
+      error: function(response){
+        console.log('something is wrong')
+      }
+    });
     //AJAX
     function loadPeeps() {
         $.ajax({
             type: 'GET',
             url: '/people',
             success: function(response) {
-                response.forEach(function(peeps) {
+                response.forEach(function(peeps){
                     appendDOM(peeps);
                 });
+            },
+            //added an error response;
+            error: function(respose) {
+              console.log('GET: something is wrong');
             }
         });
     };
@@ -22,6 +42,8 @@ $(document).ready(function() {
         $el.append('<img class="peep-image" src="' + peeps.url + '"></img>');
         $el.append('<h2 class="peep-name">' + peeps.name + '</h2>');
         $el.append('<p class="peep-bio">' + peeps.bio + '</p>');
+        $el.append('<button class="like">Like!</button>');
+        //added the like button;
     }
 
 

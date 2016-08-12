@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var path = require('path');
-var peeps = require('./routes/people.js'); //.js is assumed
+var peeps = require('./routes/people'); //.js is assumed
 
 app.use(bodyParser.urlencoded({
     extended: true
